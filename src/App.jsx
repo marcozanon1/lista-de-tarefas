@@ -2,6 +2,9 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import FormPage from './components/FormPage';
 import TasksPage from './components/TasksPage';
 import EditTask from './components/EditTask';
+import './App.css';
+ 
+ 
 
 function App() {
   return (

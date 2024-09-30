@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './EditTask.css'; // Importa o arquivo CSS
 
 function EditTask() {
   const { id } = useParams();
@@ -43,29 +44,33 @@ function EditTask() {
   };
 
   return (
-    <form onSubmit={handleUpdate}>
-      <div>
-        <label>Nome da Tarefa:</label>
+    <form className="edit-task-form" onSubmit={handleUpdate}>
+      <div className="form-group">
+        <label className="form-label">Nome da Tarefa:</label>
         <input
           type="text"
+          className="form-input"
           name="name"
           value={task.name}
           onChange={(e) => setTask({ ...task, name: e.target.value })}
           required
         />
       </div>
-      <div>
-        <label>Tarefa:</label>
+      <div className="form-group">
+        <label className="form-label">Tarefa:</label>
         <input
           type="text"
+          className="form-input"
           name="description"
           value={task.description}
           onChange={(e) => setTask({ ...task, description: e.target.value })}
           required
         />
       </div>
-      <button type="submit">Salvar</button>
-      <button type="button" onClick={() => navigate('/tasks')}>Cancelar</button>
+      <div className="form-buttons">
+        <button type="submit" className="btn btn-save">Salvar</button>
+        <button type="button" className="btn btn-cancel" onClick={() => navigate('/tasks')}>Cancelar</button>
+      </div>
     </form>
   );
 }

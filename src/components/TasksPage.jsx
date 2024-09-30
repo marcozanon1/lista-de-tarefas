@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import TaskItem from './TaskItem';
 import { useNavigate } from 'react-router-dom';
+import './TasksPage.css'; // Importa o arquivo CSS
 
 function TasksPage() {
   const [tasks, setTasks] = useState([]);
@@ -10,7 +11,7 @@ function TasksPage() {
   useEffect(() => {
     async function fetchTasks() {
       try {
-        const response = await axios.get("https://66f73cf1b5d85f31a3424e7c.mockapi.io/api/tasks"); // Substitua pela sua API
+        const response = await axios.get("https://66f73cf1b5d85f31a3424e7c.mockapi.io/api/tasks");
         setTasks(response.data);
       } catch (error) {
         console.error('Erro ao carregar tarefas', error);
@@ -20,10 +21,10 @@ function TasksPage() {
   }, []);
 
   return (
-    <div>
-      <h1>Tarefas Salvas</h1>
-      <button onClick={() => navigate('/')}>Voltar ao Início</button>
-      <ul>
+    <div className="tasks-page">
+      <h1 className="tasks-title">Tarefas Salvas</h1>
+      <button className="btn btn-back" onClick={() => navigate('/')}>Voltar ao Início</button>
+      <ul className="tasks-list">
         {tasks.map(task => (
           <TaskItem key={task.id} task={task} />
         ))}

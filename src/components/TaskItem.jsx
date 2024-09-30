@@ -1,5 +1,7 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './TaskItem.css'; // Importa o arquivo CSS
 
 function TaskItem({ task }) {
   const navigate = useNavigate();
@@ -8,7 +10,7 @@ function TaskItem({ task }) {
     try {
       await axios.delete(`https://66f73cf1b5d85f31a3424e7c.mockapi.io/api/tasks/${task.id}`); // Substitua pela sua API
       alert('Tarefa excluída');
-      window.location.reload()
+      window.location.reload();
     } catch (error) {
       console.error('Erro ao excluir tarefa', error);
     }
@@ -17,20 +19,22 @@ function TaskItem({ task }) {
   const handleMarkAsDone = async () => {
     try {
       await axios.put(`https://66f73cf1b5d85f31a3424e7c.mockapi.io/api/tasks/${task.id}`, { ...task, done: true });
-      window.location.reload()
+      window.location.reload();
     } catch (error) {
       console.error('Erro ao marcar tarefa', error);
     }
   };
 
   return (
-    <li>
-      <h3>{task.name}</h3>
-      <p>{task.description}</p>
-      <p>Status: {task.done ? 'Concluída' : 'Pendente'}</p> {/* Exibição do status */}
-      <button onClick={() => navigate(`/edit/${task.id}`)}>Editar</button>
-      <button onClick={handleMarkAsDone} disabled={task.done}>Marcar como Feita</button> {/* Desabilitar se já estiver concluída */}
-      <button onClick={handleDelete}>Excluir</button>
+    <li className="task-item">
+      <h3 className="task-title">{task.name}</h3>
+      <p className="task-description">{task.description}</p>
+      <p className="task-status">Status: {task.done ? 'Concluída' : 'Pendente'}</p>
+      <div className="task-buttons">
+        <button className="btn btn-edit" onClick={() => navigate(`/edit/${task.id}`)}>Editar</button>
+        <button className="btn btn-done" onClick={handleMarkAsDone} disabled={task.done}>Marcar como Feita</button>
+        <button className="btn btn-delete" onClick={handleDelete}>Excluir</button>
+      </div>
     </li>
   );
 }

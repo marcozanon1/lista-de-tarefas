@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './FormPage.css'; // Importa o arquivo CSS
 
 function FormPage() {
   const [task, setTask] = useState({ name: '', description: '' });
@@ -25,28 +26,32 @@ function FormPage() {
   };
 
   return (
-    <form onSubmit={handleSave}>
-      <div>
-        <label>Nome da Tarefa:</label>
+    <form className="form-page" onSubmit={handleSave}>
+      <div className="form-group">
+        <label className="form-label">Nome da Tarefa:</label>
         <input
           type="text"
+          className="form-input"
           name="name"
           value={task.name}
           onChange={handleChange}
         />
       </div>
-      <div>
-        <label>Tarefa:</label>
+      <div className="form-group">
+        <label className="form-label">Tarefa:</label>
         <input
           type="text"
+          className="form-input"
           name="description"
           value={task.description}
           onChange={handleChange}
         />
       </div>
-      <button type="submit">Salvar</button>
-      <button type="button" onClick={() => setTask({ name: '', description: '' })}>Cancelar</button>
-      <button type="button" onClick={() => navigate('/tasks')}>Ver Tarefas</button>
+      <div className="form-buttons">
+        <button type="submit" className="btn btn-save">Salvar</button>
+        <button type="button" className="btn btn-cancel" onClick={() => setTask({ name: '', description: '' })}>Cancelar</button>
+        <button type="button" className="btn btn-view" onClick={() => navigate('/tasks')}>Ver Tarefas</button>
+      </div>
     </form>
   );
 }
