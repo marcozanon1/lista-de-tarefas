@@ -1,14 +1,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './TaskItem.css'; // Importa o arquivo CSS
+import './TaskItem.css'; 
 
 function TaskItem({ task }) {
   const navigate = useNavigate();
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`https://66f73cf1b5d85f31a3424e7c.mockapi.io/api/tasks/${task.id}`); // Substitua pela sua API
+      await axios.delete(`https://66f73cf1b5d85f31a3424e7c.mockapi.io/api/tasks/${task.id}`); 
       alert('Tarefa excluída');
       window.location.reload();
     } catch (error) {
