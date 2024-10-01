@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './TaskItem.css'; // Importa o arquivo CSS
+import './TaskItem.css'; 
 
 function TaskItem({ task, onTaskUpdate, onTaskDelete }) { // Recebe as funções via props
   const navigate = useNavigate();
