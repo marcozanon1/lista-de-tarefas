@@ -20,13 +20,30 @@ function TasksPage() {
     fetchTasks();
   }, []);
 
+  // Função para atualizar o estado quando uma tarefa é marcada como feita
+  const handleTaskUpdate = (updatedTask) => {
+    setTasks(tasks.map(task => 
+      task.id === updatedTask.id ? updatedTask : task
+    ));
+  };
+
+  // Função para remover uma tarefa do estado após exclusão
+  const handleTaskDelete = (taskId) => {
+    setTasks(tasks.filter(task => task.id !== taskId));
+  };
+
   return (
     <div className="tasks-page">
       <h1 className="tasks-title">Tarefas Salvas</h1>
       <button className="btn btn-back" onClick={() => navigate('/')}>Voltar ao Início</button>
       <ul className="tasks-list">
         {tasks.map(task => (
-          <TaskItem key={task.id} task={task} />
+          <TaskItem 
+            key={task.id} 
+            task={task} 
+            onTaskUpdate={handleTaskUpdate} // Passa a função de atualização
+            onTaskDelete={handleTaskDelete} // Passa a função de exclusão
+          />
         ))}
       </ul>
     </div>

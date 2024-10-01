@@ -3,14 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './TaskItem.css'; // Importa o arquivo CSS
 
-function TaskItem({ task }) {
+function TaskItem({ task, onTaskUpdate, onTaskDelete }) { // Recebe as funções via props
   const navigate = useNavigate();
 
   const handleDelete = async () => {
     try {
       await axios.delete(`https://66f73cf1b5d85f31a3424e7c.mockapi.io/api/tasks/${task.id}`); 
       alert('Tarefa excluída');
-      window.location.reload();
+      onTaskDelete(task.id); // Chama a função para remover a tarefa do estado
     } catch (error) {
       console.error('Erro ao excluir tarefa', error);
     }
@@ -19,7 +19,7 @@ function TaskItem({ task }) {
   const handleMarkAsDone = async () => {
     try {
       await axios.put(`https://66f73cf1b5d85f31a3424e7c.mockapi.io/api/tasks/${task.id}`, { ...task, done: true });
-      window.location.reload();
+      onTaskUpdate({ ...task, done: true }); // Atualiza o estado da tarefa
     } catch (error) {
       console.error('Erro ao marcar tarefa', error);
     }
